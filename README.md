@@ -156,7 +156,7 @@ Non interactive
 - `hsh main.c shell.c test_ls_2`
 
 # Secuence Diagram
-![](https://github.com/paurbano/simple_shell/blob/task1/sequence_diagram.png)
+![](https://github.com/paurbano/simple_shell/blob/master/sequence_diagram.png)
 
 # Authors
 - Pablo Andrés Urbano de la Cruz
