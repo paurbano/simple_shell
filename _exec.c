@@ -73,8 +73,8 @@ char *get_env_var(char *variable, char **env)
 			;
 		if (j == 4)
 		{
-			paths = malloc(sizeof(char) * strlen(varvalue));
-			for (j = 5; j <= strlen(varvalue) ; j++, k++)
+			paths = malloc(sizeof(char) * _strlen(varvalue));
+			for (j = 5; j <= _strlen(varvalue) ; j++, k++)
 				*(paths + k) = *(varvalue + j);
 			paths[k] = '\0';
 			return (paths);
@@ -99,7 +99,7 @@ char *get_cmd_path(char *varvalue, char *command)
 	struct stat stat_cmd;
 
 	paths = _strtok(varvalue, ":");
-	sizecmd = strlen(paths) + strlen(command) + 1;
+	sizecmd = _strlen(paths) + _strlen(command) + 1;
 
 	while (paths != NULL)
 	{
@@ -151,7 +151,7 @@ write(STDOUT_FILENO, av, _strlen(av));
 write(STDOUT_FILENO, ": ", 2);
 write(STDOUT_FILENO, &count, 2);
 write(STDOUT_FILENO, ": ", 2);
-write(STDOUT_FILENO, args[0], strlen(args[0]));
+write(STDOUT_FILENO, args[0], _strlen(args[0]));
 write(STDOUT_FILENO, ": ", 2);
 if (error == 126)
 	write(STDOUT_FILENO, "Permission denied\n", 10);
