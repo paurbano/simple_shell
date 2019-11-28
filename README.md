@@ -11,7 +11,7 @@ No handle special characters, env , history and help built-in, file as input, co
 All our files are compiled on Ubuntu 14.04 LTS
 The C program and functions are compiled with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
 
-# Files 
+# Files
 
 + AUTHORS
 + README.md
@@ -25,12 +25,12 @@ The C program and functions are compiled with gcc 4.8.4 using the flags -Wall -W
 + man_3_shell
 + shell.h
 
-# Compilation 
+# Compilation
 
  - `$gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
 
 
-Execute the file hsh 
+Execute the file hsh
 
  - `vagrant@vagrant-ubuntu-trusty-64:~$./hsh`
 
@@ -67,11 +67,11 @@ All the files are to be compiled on Ubuntu 14.04 LTS Compile your code with
  - `$gcc -Wall -Werror -Wextra -pedantic *.c`
  - `$ ./hsh`
 
-type the command in interactive or non-interactive mode  
+type the command in interactive or non-interactive mode
 
-# Repository Functions 
+# Repository Functions
 
-| Function                              | Description | 
+| Function                              | Description |
 | ---------                             | ----- |
 | char * _prompt(void)                     | display the dollar sign as prompt and get the command from standard input |
 | char **_separaArgs(char *)   `            | Takes the string from the standard input and separe it in tokens.         |
