@@ -136,6 +136,15 @@ void exitp(char *buffer)
 }
 
 
+/**
+ * msg - error message
+ * @av: non interactive
+ * @count: counter
+ * @args: interactive
+ * @error: number
+ * Description: free buffer
+ * Return: 0
+ */
 int msg(char av[], int count, char **args, int error)
 {
 write(STDOUT_FILENO, av, _strlen(av));
