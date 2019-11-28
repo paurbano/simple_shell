@@ -63,15 +63,15 @@ char *get_env_var(char *variable, char **env)
 {
 	char *varvalue, *paths;
 	int i = 0, k = 0;
-	unsigned int j = 0;
+	int j = 0;
 
 	while (env[i] != NULL)
 	{
 		varvalue = env[i];
 		/*found variable PATH*/
-		for (j = 0; j <= 3 && (varvalue[j] == variable[j]) ; j++)
+		for (j = 0; j < _strlen(variable) && (varvalue[j] == variable[j]) ; j++)
 			;
-		if (j == 4)
+		if (j == _strlen(variable))
 		{
 			paths = malloc(sizeof(char) * _strlen(varvalue));
 			for (j = 5; j <= _strlen(varvalue) ; j++, k++)
@@ -130,8 +130,7 @@ void exitp(char *buffer)
 {
 	if (_strcmp("exit", buffer) == 0 && buffer != NULL)
 	{
-		free(buffer);
-		exit(EXIT_SUCCESS);
+		free(0);
 	}
 }
 
