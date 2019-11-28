@@ -16,7 +16,7 @@ int _builtin(char **cmd, char **env)
 	for (i = 0; i < CantBuiltins; i++)
 	{
 		/*printf("cmd:%s, Built:%s ",cmd[0],ListOfBuiltIns[i]);*/
-		if (strcmp(cmd[0], ListOfBuiltIns[i]) == 0)
+		if (_strcmp(cmd[0], ListOfBuiltIns[i]) == 0)
 		{
 			command = i + 1;
 			break;
@@ -32,10 +32,10 @@ int _builtin(char **cmd, char **env)
 		hsh_env(env);
 		return (1);
 	case 3:
-		printf("help");
+		/*printf("help");*/
 		return (1);
 	case 4:
-		printf("mkdir");
+		/*printf("mkdir");*/
 		return (1);
 	default:
 		return (0);
@@ -65,7 +65,7 @@ void hsh_cd(char **cmd, char **env)
 	if (chdir(cmd[0]) != 0)
 		perror("-hsh: cd");
 	else
-		getcwd(PWD, strlen(cmd[0]));
+		getcwd(PWD, _strlen(cmd[0]));
 }
 
 /**
