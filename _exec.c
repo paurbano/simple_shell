@@ -27,7 +27,8 @@ void _exec(char **args, char **env, char av[], int count)
 			{
 				/*printf("comando con ruta relativa\n");*/
 				exerror = execve(args[0], args, NULL);
-				exerror == -1 ? printf("%s: %d: %s: not found\n", av, count, args[0]) : exerror;
+				exerror == -1 ? msg(av, count, args, 127) : exerror;
+				/*exit(127);*/
 			}
 			else
 			{
@@ -35,7 +36,8 @@ void _exec(char **args, char **env, char av[], int count)
 				val_path = get_env_var("PATH", env);
 				path = get_cmd_path(val_path, args[0]);
 				exerror = execve(path, args, NULL);
-				exerror == -1 ? printf("%s: %d: %s: not found\n", av, count, args[0]) : exerror;
+				exerror == -1 ? msg(av, count, args, 127) : exerror;
+				/*exit(127);*/
 			}
 		}
 		if (pid < 0)
@@ -111,7 +113,6 @@ char *get_cmd_path(char *varvalue, char *command)
 
 		if (stat(cmdPath, &stat_cmd) == 0)
 			return (cmdPath);
-
 		free(cmdPath);
 		paths = _strtok(NULL, ":");
 	}
@@ -132,4 +133,22 @@ void exitp(char *buffer)
 		free(buffer);
 		exit(EXIT_SUCCESS);
 	}
+}
+
+
+int msg(char av[], int count, char **args, int error)
+{
+write(STDOUT_FILENO, av, _strlen(av));
+write(STDOUT_FILENO, ": ", 2);
+write(STDOUT_FILENO, &count, 2);
+write(STDOUT_FILENO, ": ", 2);
+write(STDOUT_FILENO, args[0], strlen(args[0]));
+write(STDOUT_FILENO, ": ", 2);
+if (error == 126)
+	write(STDOUT_FILENO, "Permission denied\n", 10);
+else
+	write(STDOUT_FILENO, "Not Found\n", 10);
+	exit(127);
+
+return (0);
 }

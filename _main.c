@@ -36,8 +36,9 @@ int main(int argc, char *argv[], char **env)
 			/*printf("modo no interactivo");*/
 			_exec(argv, env, argv[0], count);
 		}
-		free(linea);
-		freedp(args);
+freedp(args);		
 	} while (status);
+/*	free(linea);*/
+	/*freedp(args);*/
 	exit(0);
 }

@@ -25,4 +25,5 @@ char *get_cmd_path(char *varvalue, char *command);
 void ctrc(int i);
 void exitp(char *buffer);
 void freedp(char **);
+int msg(char av[], int count, char **args, int n);
 #endif

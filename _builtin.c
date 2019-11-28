@@ -82,7 +82,9 @@ void hsh_env(char **env)
 	i = 0;
 	while (env[i] != NULL)
 	{
-		printf("%s\n", env[i]);
+		write(STDOUT_FILENO,env[i],_strlen(env[i]));
+		write(STDOUT_FILENO,"\n",1);
+		/*printf("%s\n", env[i]);*/
 		i++;
 	}
 }
