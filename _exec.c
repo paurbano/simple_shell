@@ -63,18 +63,18 @@ char *get_env_var(char *variable, char **env)
 {
 	char *varvalue, *paths;
 	int i = 0, k = 0;
-	int j = 0;
+	unsigned int j = 0;
 
 	while (env[i] != NULL)
 	{
 		varvalue = env[i];
 		/*found variable PATH*/
-		for (j = 0; j < _strlen(variable) && (varvalue[j] == variable[j]) ; j++)
+		for (j = 0; j <= 3 && (varvalue[j] == variable[j]) ; j++)
 			;
-		if (j == _strlen(variable))
+		if (j == 4)
 		{
-			paths = malloc(sizeof(char) * _strlen(varvalue));
-			for (j = 5; j <= _strlen(varvalue) ; j++, k++)
+			paths = malloc(sizeof(char) * strlen(varvalue));
+			for (j = 5; j <= strlen(varvalue) ; j++, k++)
 				*(paths + k) = *(varvalue + j);
 			paths[k] = '\0';
 			return (paths);
@@ -99,7 +99,7 @@ char *get_cmd_path(char *varvalue, char *command)
 	struct stat stat_cmd;
 
 	paths = _strtok(varvalue, ":");
-	sizecmd = _strlen(paths) + _strlen(command) + 1;
+	sizecmd = strlen(paths) + strlen(command) + 1;
 
 	while (paths != NULL)
 	{
@@ -130,7 +130,8 @@ void exitp(char *buffer)
 {
 	if (_strcmp("exit", buffer) == 0 && buffer != NULL)
 	{
-		free(0);
+		free(buffer);
+		exit(EXIT_SUCCESS);
 	}
 }
 
@@ -150,7 +151,7 @@ write(STDOUT_FILENO, av, _strlen(av));
 write(STDOUT_FILENO, ": ", 2);
 write(STDOUT_FILENO, &count, 2);
 write(STDOUT_FILENO, ": ", 2);
-write(STDOUT_FILENO, args[0], _strlen(args[0]));
+write(STDOUT_FILENO, args[0], strlen(args[0]));
 write(STDOUT_FILENO, ": ", 2);
 if (error == 126)
 	write(STDOUT_FILENO, "Permission denied\n", 10);
