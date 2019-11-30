@@ -25,7 +25,9 @@ int main(int argc, char *argv[], char **env)
 		/*write(1,linea,15);*/
 		/*printf("antes de separar\n");*/
 		args = _separaArgs(linea);
-		/*printf("argv = %s\n", *args);*/
+		/*printf("argc: %d\n",argc);*/
+		/*printf("argv[0]: %s\n",argv[0]);*/
+		/*printf("args = %s\n", *args);*/
 		if (argc == 1)
 		{
 			/*printf("modo interactivo\n");*/
@@ -36,9 +38,8 @@ int main(int argc, char *argv[], char **env)
 			/*printf("modo no interactivo");*/
 			_exec(argv, env, argv[0], count);
 		}
-freedp(args);
+		free(linea);
 	} while (status);
-/*	free(linea);*/
-	/*freedp(args);*/
+	freedp(args);
 	exit(0);
 }

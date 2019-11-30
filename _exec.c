@@ -37,7 +37,7 @@ void _exec(char **args, char **env, char av[], int count)
 				path = get_cmd_path(val_path, args[0]);
 				exerror = execve(path, args, NULL);
 				exerror == -1 ? msg(av, count, args, 127) : exerror;
-				/*exit(127);*/
+				exit(127);
 			}
 		}
 		if (pid < 0)
@@ -63,18 +63,20 @@ char *get_env_var(char *variable, char **env)
 {
 	char *varvalue, *paths;
 	int i = 0, k = 0;
-	unsigned int j = 0;
+	int j = 0;
 
 	while (env[i] != NULL)
 	{
+		/*len = 0;*/
 		varvalue = env[i];
+		/*len = _strlen(varvalue);*/
 		/*found variable PATH*/
-		for (j = 0; j <= 3 && (varvalue[j] == variable[j]) ; j++)
+		for (j = 0; j <= _strlen(varvalue) && (varvalue[j] == variable[j]) ; j++)
 			;
 		if (j == 4)
 		{
-			paths = malloc(sizeof(char) * strlen(varvalue));
-			for (j = 5; j <= strlen(varvalue) ; j++, k++)
+			paths = malloc(sizeof(char) * _strlen(varvalue));
+			for (j = 5; j <= _strlen(varvalue) ; j++, k++)
 				*(paths + k) = *(varvalue + j);
 			paths[k] = '\0';
 			return (paths);
@@ -98,8 +100,8 @@ char *get_cmd_path(char *varvalue, char *command)
 	int sizecmd;
 	struct stat stat_cmd;
 
-	paths = _strtok(varvalue, ":");
-	sizecmd = strlen(paths) + strlen(command) + 1;
+	paths = strtok(varvalue, ":");
+	sizecmd = _strlen(paths) + _strlen(command) + 1;
 
 	while (paths != NULL)
 	{
@@ -114,7 +116,7 @@ char *get_cmd_path(char *varvalue, char *command)
 		if (stat(cmdPath, &stat_cmd) == 0)
 			return (cmdPath);
 		free(cmdPath);
-		paths = _strtok(NULL, ":");
+		paths = strtok(NULL, ":");
 	}
 
 	return (NULL);
@@ -147,12 +149,15 @@ void exitp(char *buffer)
  */
 int msg(char av[], int count, char **args, int error)
 {
-write(STDOUT_FILENO, av, _strlen(av));
+	/*printf("función mensajes\n");*/
+	/*printf("contador: %d",count);*/
+	write(STDOUT_FILENO, av, _strlen(av));
 write(STDOUT_FILENO, ": ", 2);
 write(STDOUT_FILENO, &count, 2);
 write(STDOUT_FILENO, ": ", 2);
-write(STDOUT_FILENO, args[0], strlen(args[0]));
+write(STDOUT_FILENO, args[0], _strlen(args[0]));
 write(STDOUT_FILENO, ": ", 2);
+/*printf("error: %d",error);*/
 if (error == 126)
 	write(STDOUT_FILENO, "Permission denied\n", 10);
 else
